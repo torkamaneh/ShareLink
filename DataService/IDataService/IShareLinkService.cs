@@ -7,5 +7,7 @@ namespace DataService.IDataService
 {
     public interface IShareLinkService : IBaseService<LinkModel>
     {
+        LinkModelRes AddUrl(LinkModelReq model);
+        RedirectResModel RedirectUrl(RedirectReqModel model);
     }
 }

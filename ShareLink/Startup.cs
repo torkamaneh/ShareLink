@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess;
 using DataAccess.IRepositories;
 using DataService;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ShareLink.Mapping;
 
 namespace ShareLink
 {
@@ -30,6 +32,13 @@ namespace ShareLink
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<DtoMapper>();
+            });
+            //Mapper.Initialize(cfg => cfg.AddProfile<Profilemapping>());
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

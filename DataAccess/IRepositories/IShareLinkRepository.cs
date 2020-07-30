@@ -8,5 +8,6 @@ namespace DataAccess.IRepositories
     public interface IShareLinkRepository : IRepository<LinkModel>
     {
         LinkModel GetUrlByShortLink(Guid shortLink);
+       
     }
 }

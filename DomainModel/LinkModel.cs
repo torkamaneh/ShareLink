@@ -10,4 +10,12 @@ namespace DomainModel
         public Guid ShortLink { get; set; }
         public int VisitorCount { get; set; }
     }
+    public class LinkModelReq
+    {
+        public string Url { get; set; }
+    }
+    public class LinkModelRes
+    {
+        public Guid ShortLink { get; set; }
+    }
 }

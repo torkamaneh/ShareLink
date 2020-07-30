@@ -14,33 +14,33 @@ namespace DataService
         {
             _repository = repository;
         }
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             _repository.Add(entity);
         }
 
-        public void AddOrUpdate(T entity)
+        public virtual void AddOrUpdate(T entity)
         {
             _repository.AddOrUpdate(entity);
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             _repository.Delete(entity);
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             return _repository.Get(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _repository.GetAll();
 
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _repository.Update(entity);
         }
