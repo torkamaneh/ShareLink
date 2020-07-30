@@ -6,11 +6,11 @@ namespace DomainModel
 {
    public class RedirectReqModel
     {
-        public Guid ShortLink { get; set; }
+        public string ShortLink { get; set; }
     }
     public class RedirectResModel
     {
         public string Url { get; set; }
-        public HttpStatusEnum Status { get; set; }
+        public ExceptionEnum Status { get; set; }
     }
 }

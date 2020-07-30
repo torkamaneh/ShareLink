@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataService.IDataService;
 using DomainModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShareLink.Dto;
 using System;
@@ -32,14 +33,21 @@ namespace ShareLink.Controllers
         [HttpGet("{shortLink}")]
         public async Task<ActionResult> RedirectUrl(string shortLink)
         {
-            var model = new RedirectReqModel
-            {
-                ShortLink = new Guid(shortLink)
-        };
+           
+                var model = new RedirectReqModel
+                {
+                    ShortLink = shortLink//new Guid(shortLink)
+                };
+            
             var result = await _shareLinkService.RedirectUrl(model);
-            if(result.Status == HttpStatusEnum.NotFound)
+            if(result.Status == ExceptionEnum.NotFound)
             {
                 return NotFound();
+            }
+            else if(result.Status == ExceptionEnum.InvalidParameter)
+            {
+                return this.StatusCode(StatusCodes.Status400BadRequest, "لینک ارسالی نادرست می باشد.");
+              //  return HttpStatusCode.BadRequest;
             }
             return Redirect(result.Url);
         }

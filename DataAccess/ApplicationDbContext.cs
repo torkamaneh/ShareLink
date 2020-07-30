@@ -15,7 +15,6 @@ namespace DataAccess
         public DbSet<LinkModel> LinkModels { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
         }
     }
 }

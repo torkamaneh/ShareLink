@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200730073140_firstMigration")]
-    partial class firstMigration
+    [Migration("20200730114733_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,15 +27,20 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("CreateDate");
+
                     b.Property<Guid>("ShortLink");
 
-                    b.Property<string>("Url");
+                    b.Property<DateTime?>("UpdateDate");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("varchar(400)");
 
                     b.Property<int>("VisitorCount");
 
                     b.HasKey("Id");
 
-                    b.ToTable("LinkModels");
+                    b.ToTable("LinkModel");
                 });
 #pragma warning restore 612, 618
         }

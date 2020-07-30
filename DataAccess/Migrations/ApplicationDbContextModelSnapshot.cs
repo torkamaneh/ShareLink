@@ -25,19 +25,20 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreateDate");
+                    b.Property<DateTime?>("CreateDate");
 
                     b.Property<Guid>("ShortLink");
 
-                    b.Property<DateTime>("UpdateDate");
+                    b.Property<DateTime?>("UpdateDate");
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .HasColumnType("varchar(400)");
 
                     b.Property<int>("VisitorCount");
 
                     b.HasKey("Id");
 
-                    b.ToTable("LinkModels");
+                    b.ToTable("LinkModel");
                 });
 #pragma warning restore 612, 618
         }

@@ -27,23 +27,36 @@ namespace DataService
             {
                 ShortLink = linkModel.ShortLink
             };
-         }
+        }
         public async Task<RedirectResModel> RedirectUrl(RedirectReqModel model)
         {
+            LinkModel linkModel = null;
             RedirectResModel result = new RedirectResModel();
-               var linkModel = await _linkModelRepository.GetUrlByShortLink(model.ShortLink);
-            if(linkModel != null)
+            //var shortUrl = "";//new Guid(model.ShortLink);
+            var isValid = Guid.TryParse(model.ShortLink, out Guid guid);
+            if (isValid)
             {
-                linkModel.VisitorCount++;
-                linkModel.UpdateDate = DateTime.Now;
-               await base.Update(linkModel);
-                result.Url = linkModel.Url;
+                linkModel = await _linkModelRepository.GetUrlByShortLink(guid);
+
+                if (linkModel != null)
+                {
+                    linkModel.VisitorCount++;
+                    linkModel.UpdateDate = DateTime.Now;
+                    await base.Update(linkModel);
+                    result.Url = linkModel.Url;
+                }
+                else
+                {
+                    result.Status = ExceptionEnum.NotFound;
+                }
             }
+
             else
             {
-                result.Status = HttpStatusEnum.NotFound;
+                result.Status = ExceptionEnum.InvalidParameter;
             }
+
             return result;
         }
-}
+    }
 }
