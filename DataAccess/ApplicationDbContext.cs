@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DomainModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +12,7 @@ namespace DataAccess
         {
 
         }
-        //public DbSet<Profile> Profiles { get; set; }
+        public DbSet<LinkModel> LinkModels { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
