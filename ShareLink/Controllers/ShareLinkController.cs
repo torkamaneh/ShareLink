@@ -22,7 +22,7 @@ namespace ShareLink.Controllers
             _mapper = mapper;
         }
         [HttpPost]
-        public async Task<LinkResDto> Add(LinkReqDto param)
+        public async Task<ActionResult<LinkResDto>> Add(LinkReqDto param)
         {
             var model = _mapper.Map<LinkModelReq>(param);
             var result = await _shareLinkService.AddUrl(model);
@@ -30,7 +30,7 @@ namespace ShareLink.Controllers
             return resProfile;
         }
         [HttpGet("{shortLink}")]
-        public async Task<IActionResult> RedirectUrl(string shortLink)
+        public async Task<ActionResult> RedirectUrl(string shortLink)
         {
             var model = new RedirectReqModel
             {

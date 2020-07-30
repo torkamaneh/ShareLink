@@ -21,6 +21,7 @@ namespace DataService
             var linkModel = new LinkModel();
             linkModel.Url = model.Url;
             linkModel.ShortLink = Guid.NewGuid();
+            linkModel.CreateDate = DateTime.Now;
             await base.Add(linkModel);
             return new LinkModelRes
             {
@@ -34,6 +35,7 @@ namespace DataService
             if(linkModel != null)
             {
                 linkModel.VisitorCount++;
+                linkModel.UpdateDate = DateTime.Now;
                await base.Update(linkModel);
                 result.Url = linkModel.Url;
             }
