@@ -21,15 +21,15 @@ namespace ShareLink.Controllers
             _shareLinkService = shareLinkService;
             _mapper = mapper;
         }
-        [HttpPost("AddUrl")]
-        public async Task<LinkResDto> AddUrl(LinkReqDto param)
+        [HttpPost]
+        public async Task<LinkResDto> Add(LinkReqDto param)
         {
             var model = _mapper.Map<LinkModelReq>(param);
             var result = await _shareLinkService.AddUrl(model);
             var resProfile = _mapper.Map<LinkResDto>(result);
             return resProfile;
         }
-        [HttpGet("Redirect/{shortLink}")]
+        [HttpGet("{shortLink}")]
         public async Task<IActionResult> RedirectUrl(string shortLink)
         {
             var model = new RedirectReqModel
@@ -40,7 +40,6 @@ namespace ShareLink.Controllers
             if(result.Status == HttpStatusEnum.NotFound)
             {
                 return NotFound();
-               // return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
             return Redirect(result.Url);
         }
