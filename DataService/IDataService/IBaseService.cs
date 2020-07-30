@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataService.IDataService
 {
     public interface IBaseService<T> where T : BaseEntity
     {
-        T Get(int id);
-        IEnumerable<T> GetAll();
-        void Add(T entity);
-        void Delete(T entity);
-        void AddOrUpdate(T entity);
-        void Update(T entity);
+        Task<T> Get(int id);
+        Task<IEnumerable<T>> GetAll();
+        Task Add(T entity);
+        Task Delete(T entity);
+        Task AddOrUpdate(T entity);
+        Task Update(T entity);
     }
 }

@@ -11,5 +11,6 @@ namespace DomainModel
     public class RedirectResModel
     {
         public string Url { get; set; }
+        public HttpStatusEnum Status { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataService
 {
@@ -14,35 +15,35 @@ namespace DataService
         {
             _repository = repository;
         }
-        public virtual void Add(T entity)
+        public async virtual Task Add(T entity)
         {
-            _repository.Add(entity);
+           await _repository.Add(entity);
         }
 
-        public virtual void AddOrUpdate(T entity)
+        public async virtual Task AddOrUpdate(T entity)
         {
-            _repository.AddOrUpdate(entity);
+            await _repository.AddOrUpdate(entity);
         }
 
-        public virtual void Delete(T entity)
+        public async virtual Task Delete(T entity)
         {
-            _repository.Delete(entity);
+            await _repository.Delete(entity);
         }
 
-        public virtual T Get(int id)
+        public async virtual Task<T> Get(int id)
         {
-            return _repository.Get(id);
+            return await _repository.Get(id);
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public async virtual Task<IEnumerable<T>> GetAll()
         {
-            return _repository.GetAll();
+            return await _repository.GetAll();
 
         }
 
-        public virtual void Update(T entity)
+        public async virtual Task Update(T entity)
         {
-            _repository.Update(entity);
+            await _repository.Update(entity);
         }
     
 }

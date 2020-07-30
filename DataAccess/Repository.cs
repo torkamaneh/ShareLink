@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -17,42 +18,43 @@ namespace DataAccess
             _context = context;
             _entities = _context.Set<T>();
         }
-        public virtual void Add(T entity)
+        public virtual async Task Add(T entity)
         {
             _entities.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public virtual void Update(T entity)
+        public virtual async Task Update(T entity)
         {
             _entities.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public virtual void AddOrUpdate(T entity)
+        public virtual async Task AddOrUpdate(T entity)
         {
             var model = Get(entity.Id);
             if (model == null)
             {
-                Add(entity);
+               await Add(entity);
             }
             else
             {
-                Update(entity);
+                await Update(entity);
             }
         }
 
-        public virtual void Delete(T entity)
+        public async virtual Task Delete(T entity)
         {
-            _entities.Remove(entity);
+             _entities.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public virtual T Get(int id)
+        public async virtual Task<T> Get(int id)
         {
-            return _entities.FirstOrDefault(x => x.Id == id);
+            return await _entities.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public async virtual Task<IEnumerable<T>> GetAll()
         {
-            return _entities;
+            return await _entities.ToListAsync();
         }
     }
 }

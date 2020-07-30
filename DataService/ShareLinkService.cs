@@ -4,6 +4,7 @@ using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataService
 {
@@ -15,35 +16,32 @@ namespace DataService
         {
             _linkModelRepository = linkModelRepository;
         }
-        public LinkModelRes AddUrl(LinkModelReq model)
+        public async Task<LinkModelRes> AddUrl(LinkModelReq model)
         {
             var linkModel = new LinkModel();
             linkModel.Url = model.Url;
             linkModel.ShortLink = Guid.NewGuid();
-            base.Add(linkModel);
+            await base.Add(linkModel);
             return new LinkModelRes
             {
                 ShortLink = linkModel.ShortLink
             };
          }
-        public RedirectResModel RedirectUrl(RedirectReqModel model)
+        public async Task<RedirectResModel> RedirectUrl(RedirectReqModel model)
         {
-            RedirectResModel result = null;
-               var linkModel = _linkModelRepository.GetUrlByShortLink(model.ShortLink);
+            RedirectResModel result = new RedirectResModel();
+               var linkModel = await _linkModelRepository.GetUrlByShortLink(model.ShortLink);
             if(linkModel != null)
             {
                 linkModel.VisitorCount++;
-                base.Update(linkModel);
-                result = new RedirectResModel
-                {
-                    Url = linkModel.Url
-                };
-                return result;
+               await base.Update(linkModel);
+                result.Url = linkModel.Url;
             }
             else
             {
-                return null;
+                result.Status = HttpStatusEnum.NotFound;
             }
+            return result;
         }
 }
 }
