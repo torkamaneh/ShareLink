@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataService.IDataService
 {
-    public interface ILinkModelService : IBaseService<LinkModel>
+    public interface IShareLinkService : IBaseService<LinkModel>
     {
     }
 }

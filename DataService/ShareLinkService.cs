@@ -7,10 +7,10 @@ using System.Text;
 
 namespace DataService
 {
-    public class LinkModelService : BaseService<LinkModel>, ILinkModelService
+    public class ShareLinkService : BaseService<LinkModel>, IShareLinkService
     {
-        private ILinkModelRepository _linkModelRepository;
-        public LinkModelService(ILinkModelRepository linkModelRepository)
+        private IShareLinkRepository _linkModelRepository;
+        public ShareLinkService(IShareLinkRepository linkModelRepository)
           : base(linkModelRepository)
         {
             _linkModelRepository = linkModelRepository;

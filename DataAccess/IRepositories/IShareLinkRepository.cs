@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.IRepositories
 {
-    public interface ILinkModelRepository : IRepository<LinkModel>
+    public interface IShareLinkRepository : IRepository<LinkModel>
     {
         LinkModel GetUrlByShortLink(Guid shortLink);
     }
